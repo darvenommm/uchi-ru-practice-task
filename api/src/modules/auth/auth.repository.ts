@@ -25,7 +25,7 @@ export class AuthRepository {
     return await this.userRepository.findOneBy({ authToken });
   }
 
-  public async add({ login, hashedPassword }: IAddUserData): Promise<UserEntity['authToken']> {
+  public async create({ login, hashedPassword }: IAddUserData): Promise<UserEntity['authToken']> {
     const insertResult = await this.userRepository.insert({
       login,
       hashedPassword,

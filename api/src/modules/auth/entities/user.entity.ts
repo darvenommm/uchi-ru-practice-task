@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  Generated,
-  Index,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, Generated, Index, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { CONSTRAINTS } from '../constraints/auth.constraints';
 import { CatEntity } from 'src/modules/cats';
