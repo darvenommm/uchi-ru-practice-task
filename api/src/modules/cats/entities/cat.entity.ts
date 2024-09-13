@@ -1,13 +1,22 @@
-import { Column, Entity, Index, JoinTable, ManyToMany } from 'typeorm';
-import { Mixin } from 'ts-mixer';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  Index,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-import { UuidIdMixin, CreatedAtMixin } from 'src/common/database/mixin';
 import { UserEntity } from 'src/modules/auth';
 
 import type { Relation } from 'typeorm';
 
 @Entity()
-export class CatEntity extends Mixin(UuidIdMixin, CreatedAtMixin) {
+export class CatEntity {
+  @PrimaryGeneratedColumn('uuid')
+  public id: string;
+
   @Index({ unique: true })
   @Column()
   public catApiId: string;
@@ -15,4 +24,7 @@ export class CatEntity extends Mixin(UuidIdMixin, CreatedAtMixin) {
   @ManyToMany(() => UserEntity, (user: UserEntity) => user.likedCats)
   @JoinTable()
   public users: Relation<UserEntity[]>;
+
+  @CreateDateColumn()
+  public createdAt: Date;
 }

@@ -11,7 +11,7 @@ services:
       cat-pinterest-api:
         condition: service_started
     ports:
-      - "8080:80"
+      - 8080:80
     networks:
       - cat-pinterest-net
 
@@ -33,6 +33,9 @@ services:
     depends_on:
       cat-pinterest-api-pg:
         condition: service_healthy
+    ports:
+      - 4000:3000
+
 
   cat-pinterest-front:
     container_name: cat-pinterest-front

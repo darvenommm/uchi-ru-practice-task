@@ -23,8 +23,4 @@ export class ConfigSchema implements IRawConfig {
   @IsString()
   @Length(1)
   public DB_DATABASE: string;
-
-  @IsString()
-  @Length(1)
-  public DB_SCHEMA: string;
 }

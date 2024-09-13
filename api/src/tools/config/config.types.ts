@@ -4,7 +4,6 @@ export interface IRawConfig {
   DB_USERNAME: string;
   DB_PASSWORD: string;
   DB_DATABASE: string;
-  DB_SCHEMA: string;
 }
 
 export interface IConfig {
@@ -13,5 +12,4 @@ export interface IConfig {
   username: string;
   password: string;
   database: string;
-  schema: string;
 }

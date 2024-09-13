@@ -29,8 +29,4 @@ export class Config implements IConfig {
   public get database(): string {
     return this.configService.get('DB_DATABASE', { infer: true });
   }
-
-  public get schema(): string {
-    return this.configService.get('DB_SCHEMA', { infer: true });
-  }
 }
