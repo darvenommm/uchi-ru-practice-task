@@ -1,19 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { fetch, Response } from 'undici';
 
 import { LikedCatsRepository } from './likedCats.repository';
 
-import type { LikedCatEntity } from './entities/likedCat.entity';
 import type { UserEntity } from '../auth';
 import type { AddLikedCatDTO } from './dto/addLikedCat.dto';
 
 @Injectable()
 export class LikedCatsService {
+  private readonly CAT_API_URL = 'https://api.thecatapi.com/v1/images';
+
   public constructor(private readonly likedCatsRepository: LikedCatsRepository) {}
 
-  public async getAllByUser(user: UserEntity): Promise<LikedCatEntity['apiId'][]> {
+  public async getAllByUser(user: UserEntity): Promise<unknown[]> {
     const likedCats = await this.likedCatsRepository.getAllByUser(user);
 
-    return likedCats.map((likedCat): string => likedCat.apiId);
+    const responses = await Promise.all(
+      likedCats.map(({ apiId }): Promise<Response> => fetch(`${this.CAT_API_URL}/${apiId}`)),
+    );
+
+    return Promise.all(responses.map((response): Promise<unknown> => response.json()));
   }
 
   public async addLikedCat(user: UserEntity, { apiId }: AddLikedCatDTO): Promise<void> {

@@ -16,7 +16,6 @@ import { AuthGuard } from '../auth/auth.guard';
 import { AddLikedCatDTO } from './dto/addLikedCat.dto';
 
 import type { Request } from 'express';
-import type { LikedCatEntity } from './entities/likedCat.entity';
 import type { UserEntity } from '../auth';
 
 @UseGuards(AuthGuard)
@@ -25,7 +24,7 @@ export class LikedCatsController {
   public constructor(private readonly likedCatsService: LikedCatsService) {}
 
   @Get()
-  public async getAllLiked(@Req() request: Request): Promise<LikedCatEntity['apiId'][]> {
+  public async getAllLiked(@Req() request: Request): Promise<unknown[]> {
     return this.likedCatsService.getAllByUser(this.getUser(request));
   }
 
