@@ -1,7 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 
+import { EntryForm } from '@/widgets/EntryForm';
+
 const Component = (): JSX.Element => {
-  return <div>Entry</div>;
+  return <EntryForm />;
 };
 
 export const Route = createFileRoute('/(auth)/_layout/entry/')({

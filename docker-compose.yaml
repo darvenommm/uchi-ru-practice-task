@@ -33,14 +33,16 @@ services:
       cat-pinterest-api-pg:
         condition: service_healthy
     ports:
-      - 4000:3000
-
+      - $SERVER_PORT:3000
 
   cat-pinterest-front:
     container_name: cat-pinterest-front
     image: cat-pinterest-front
     build:
       context: ./front/
+      args:
+        - SERVER_URL=$SERVER_URL
+        - SERVER_PORT=$SERVER_PORT
     networks:
       - cat-pinterest-net
     environment:

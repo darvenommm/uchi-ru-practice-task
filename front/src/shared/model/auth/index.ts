@@ -1,3 +1,3 @@
-export { getAuthToken } from './getAuthToken';
-export { setAuthToken } from './setAuthToken';
-export { redirectToEntryIfNotAuth } from './redirect';
+export { redirectIfNotAuth } from './redirect/redirectIfNotAuth';
+export { getAuthToken } from './token/getAuthToken';
+export { setAuthToken } from './token/setAuthToken';
