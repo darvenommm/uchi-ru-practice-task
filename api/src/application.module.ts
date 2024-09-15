@@ -5,9 +5,10 @@ import { ConfigModule } from './tools/config';
 import { DatabaseModule } from './tools/database';
 import { AuthModule } from './modules/auth';
 import { CatsModule } from './modules/cats';
+import { LikedCatsModule } from './modules/likedCats';
 
 @Module({
-  imports: [ConfigModule, DatabaseModule, AuthModule, CatsModule],
+  imports: [ConfigModule, DatabaseModule, AuthModule, CatsModule, LikedCatsModule],
   providers: [
     {
       provide: APP_PIPE,

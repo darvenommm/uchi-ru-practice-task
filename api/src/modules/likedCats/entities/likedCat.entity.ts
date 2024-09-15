@@ -13,13 +13,13 @@ import { UserEntity } from 'src/modules/auth';
 import type { Relation } from 'typeorm';
 
 @Entity()
-export class CatEntity {
+export class LikedCatEntity {
   @PrimaryGeneratedColumn('uuid')
   public id: string;
 
   @Index({ unique: true })
   @Column()
-  public catApiId: string;
+  public apiId: string;
 
   @ManyToMany(() => UserEntity, (user: UserEntity) => user.likedCats)
   @JoinTable()

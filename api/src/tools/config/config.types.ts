@@ -4,6 +4,7 @@ export type IRawConfig = Readonly<{
   DB_USERNAME: string;
   DB_PASSWORD: string;
   DB_DATABASE: string;
+  CATS_API_KEY: string;
 }>;
 
 export type IConfig = Readonly<{
@@ -12,4 +13,5 @@ export type IConfig = Readonly<{
   username: string;
   password: string;
   database: string;
+  catsApiKey: string;
 }>;

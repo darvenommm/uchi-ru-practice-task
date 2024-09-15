@@ -29,4 +29,8 @@ export class Config implements IConfig {
   public get database(): string {
     return this.configService.get('DB_DATABASE', { infer: true });
   }
+
+  public get catsApiKey(): string {
+    return this.configService.get('CATS_API_KEY', { infer: true });
+  }
 }

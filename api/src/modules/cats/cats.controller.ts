@@ -1,46 +1,18 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Delete,
-  HttpCode,
-  HttpStatus,
-  UseGuards,
-  Req,
-  Body,
-  Param,
-} from '@nestjs/common';
+import { Controller, DefaultValuePipe, Get, ParseIntPipe, Query, UseGuards } from '@nestjs/common';
 
-import { CatsService } from './cats.service';
 import { AuthGuard } from '../auth/auth.guard';
-import { AddCatDTO } from './dto/addCat.dto';
-
-import type { Request } from 'express';
-import type { CatsIds } from './cats.types';
-import type { UserEntity } from '../auth';
+import { CatsService } from './cats.service';
 
 @UseGuards(AuthGuard)
-@Controller('likes')
+@Controller('cats')
 export class CatsController {
   public constructor(private readonly catsService: CatsService) {}
 
   @Get()
-  public async getAllLiked(@Req() request: Request): Promise<CatsIds> {
-    return this.catsService.getCats(this.getUser(request));
-  }
-
-  @Post()
-  public async addLikedCat(@Req() request: Request, @Body() addCatDTO: AddCatDTO): Promise<void> {
-    this.catsService.addCat(this.getUser(request), addCatDTO);
-  }
-
-  @Delete(':catApiId')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  public async deleteLikedCat(@Param('catApiId') catApiId: string): Promise<void> {
-    this.catsService.deleteCat(catApiId);
-  }
-
-  private getUser(request: Request): UserEntity {
-    return request.user!;
+  public async getAll(
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+    @Query('page', new DefaultValuePipe(0), ParseIntPipe) page: number,
+  ): Promise<unknown> {
+    return this.catsService.getAll({ limit, page });
   }
 }

@@ -1,7 +1,7 @@
 import { Column, Entity, Generated, Index, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { CONSTRAINTS } from '../constraints/auth.constraints';
-import { CatEntity } from 'src/modules/cats';
+import { LikedCatEntity } from 'src/modules/likedCats';
 
 import type { Relation } from 'typeorm';
 
@@ -22,6 +22,6 @@ export class UserEntity {
   @Generated('uuid')
   public authToken: string;
 
-  @ManyToMany(() => CatEntity, (cat: CatEntity) => cat.users)
-  public likedCats: Relation<CatEntity[]>;
+  @ManyToMany(() => LikedCatEntity, (cat: LikedCatEntity) => cat.users)
+  public likedCats: Relation<LikedCatEntity[]>;
 }

@@ -1,30 +1,29 @@
 import { Injectable } from '@nestjs/common';
+import { fetch } from 'undici';
 
-import { CatsRepository } from './cats.repository';
+import { Config } from 'src/tools/config';
 
-import type { UserEntity } from '../auth';
-import type { CatsIds } from './cats.types';
-import type { AddCatDTO } from './dto/addCat.dto';
+type IPaginationOptions = Readonly<{
+  limit: number;
+  page: number;
+}>;
 
 @Injectable()
 export class CatsService {
-  public constructor(private readonly catsRepository: CatsRepository) {}
+  private readonly CATS_API_URL = 'https://api.thecatapi.com/v1/images/search';
 
-  public async getCats(user: UserEntity): Promise<CatsIds> {
-    const cats = await this.catsRepository.getAllByUserId(user);
+  public constructor(private readonly config: Config) {}
 
-    return cats.map((cat): string => cat.catApiId);
-  }
+  public async getAll({ limit, page }: IPaginationOptions): Promise<unknown> {
+    const params = { limit: String(limit), page: String(page), order: 'ASC' };
 
-  public async addCat(user: UserEntity, { catApiId }: AddCatDTO): Promise<void> {
-    const cat = await this.catsRepository.getByApiId(catApiId);
+    const url = new URL(this.CATS_API_URL);
+    url.search = String(new URLSearchParams(params));
 
-    if (!cat) await this.catsRepository.create(catApiId);
+    const response = await fetch(url, {
+      headers: { 'x-api-key': this.config.catsApiKey },
+    });
 
-    await this.catsRepository.addLinkWithUser(cat, user);
-  }
-
-  public async deleteCat(catApiId: string): Promise<void> {
-    await this.catsRepository.delete(catApiId);
+    return await response.json();
   }
 }
