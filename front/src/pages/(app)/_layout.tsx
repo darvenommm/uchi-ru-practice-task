@@ -1,13 +1,16 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
 import { Header } from '@/widgets/Header';
+import { Container } from '@/shared/ui/styles';
 
 const Layout = (): JSX.Element => {
   return (
     <>
       <Header />
       <main>
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
       </main>
     </>
   );
