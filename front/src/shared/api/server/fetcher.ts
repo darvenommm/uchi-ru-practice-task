@@ -17,8 +17,8 @@ export const fetcher = ky.create({
     ],
     beforeError: [
       (error): HTTPError => {
-        if (error.response.status === StatusCodes.UNAUTHORIZED) {
-          throw redirect({ to: '/entry' });
+        if (error.response.status === StatusCodes.FORBIDDEN) {
+          redirect({ to: '/entry' });
         }
 
         return error;

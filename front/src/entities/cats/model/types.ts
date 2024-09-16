@@ -3,4 +3,5 @@ export interface ICat {
   url: string;
   width: number;
   height: number;
+  isLiked: boolean;
 }
