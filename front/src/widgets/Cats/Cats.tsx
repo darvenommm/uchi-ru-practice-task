@@ -6,18 +6,18 @@ import { useEffect, useRef } from 'react';
 import { ToggleCatLike } from '@/features/ToggleCatLike';
 
 export const Cats = (): JSX.Element => {
-  const { data, error, fetchNextPage, status } = useInfiniteQuery({
+  const { data, error, fetchNextPage, status, isFetching } = useInfiniteQuery({
     queryKey: [CATS_QUERY_KEY],
     queryFn: ({ pageParam: page }: { pageParam: number }) => getCats({ page }),
     initialPageParam: 0,
-    getNextPageParam: (_, allPages): number => allPages.length + 1,
+    getNextPageParam: (_, allPages): number => allPages.length,
   });
 
   const observer = useRef<null | IntersectionObserver>(null);
   const lastElementRef = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
-    if (!data || !lastElementRef.current) return;
+    if (!lastElementRef.current || isFetching) return;
 
     observer.current = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -28,7 +28,14 @@ export const Cats = (): JSX.Element => {
     });
 
     observer.current.observe(lastElementRef.current);
-  }, [data, fetchNextPage]);
+
+    return (): void => {
+      if (lastElementRef.current) {
+        observer.current?.unobserve(lastElementRef.current);
+        observer.current = null;
+      }
+    };
+  }, [isFetching, fetchNextPage]);
 
   if (status === 'pending') return <p>Загружается...</p>;
   if (status === 'error') return <p>Ошибка: {error.message}</p>;
