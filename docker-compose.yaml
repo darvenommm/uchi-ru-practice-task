@@ -42,7 +42,7 @@ services:
     build:
       context: ./front/
       args:
-        - SERVER_URL=$SERVER_URL
+        - SERVER_DOMAIN=$SERVER_DOMAIN
         - SERVER_PORT=$SERVER_PORT
     networks:
       - cat-pinterest-net

@@ -1,5 +1,10 @@
-import { Router } from './router';
+import { QueryClient } from './QueryClient';
+import { Router } from './Router';
 
 export const App = (): JSX.Element => {
-  return <Router />;
+  return (
+    <QueryClient>
+      <Router />
+    </QueryClient>
+  );
 };

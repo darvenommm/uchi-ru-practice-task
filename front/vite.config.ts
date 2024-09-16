@@ -24,7 +24,7 @@ export default defineConfig({
     },
   },
   define: {
-    SERVER_URL: JSON.stringify(process.env.SERVER_URL),
+    SERVER_DOMAIN: JSON.stringify(process.env.SERVER_DOMAIN),
     SERVER_PORT: JSON.stringify(process.env.SERVER_PORT),
   },
 });
