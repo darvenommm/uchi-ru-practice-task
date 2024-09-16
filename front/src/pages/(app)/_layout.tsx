@@ -1,11 +1,15 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 
+import { Header } from '@/widgets/Header';
+
 const Layout = (): JSX.Element => {
   return (
-    <main>
-      <div>App</div>
-      <Outlet />
-    </main>
+    <>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+    </>
   );
 };
 
