@@ -1,12 +1,12 @@
 import { Fragment } from 'react/jsx-runtime';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { getCats } from '@/entities/cats';
+import { CATS_QUERY_KEY, getCats } from '@/entities/cats';
 import { useEffect, useRef } from 'react';
 
 export const Cats = (): JSX.Element => {
   const { data, error, fetchNextPage, status } = useInfiniteQuery({
-    queryKey: ['cats'],
+    queryKey: [CATS_QUERY_KEY],
     queryFn: ({ pageParam: page }: { pageParam: number }) => getCats({ page }),
     initialPageParam: 0,
     getNextPageParam: (_, allPages): number => allPages.length + 1,
@@ -27,10 +27,6 @@ export const Cats = (): JSX.Element => {
     });
 
     observer.current.observe(lastElementRef.current);
-
-    return () => {
-      observer.current = null;
-    };
   }, [data, fetchNextPage]);
 
   if (status === 'pending') return <p>Загружается...</p>;

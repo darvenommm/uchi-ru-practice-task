@@ -1,0 +1,1 @@
+export { LikedCats } from './LikedCats';
