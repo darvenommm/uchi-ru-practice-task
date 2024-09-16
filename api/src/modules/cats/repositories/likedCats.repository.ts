@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { LikedCatEntity } from './entities/likedCat.entity';
+import { LikedCatEntity } from '../entities/likedCat.entity';
 
 import type { Repository } from 'typeorm';
-import type { UserEntity } from '../auth';
+import type { UserEntity } from 'src/modules/auth';
 
 interface ILikedCatRelationsOptions {
   withUsers: boolean;

@@ -1,7 +1,8 @@
 import { Controller, DefaultValuePipe, Get, ParseIntPipe, Query, UseGuards } from '@nestjs/common';
 
-import { AuthGuard } from '../auth/auth.guard';
-import { CatsService } from './cats.service';
+import { AuthGuard } from 'src/modules/auth/auth.guard';
+import { CatsService } from '../services/cats.service';
+import { ICat } from '../types';
 
 @UseGuards(AuthGuard)
 @Controller('cats')
@@ -12,7 +13,7 @@ export class CatsController {
   public async getAll(
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(0), ParseIntPipe) page: number,
-  ): Promise<unknown> {
+  ): Promise<ICat[]> {
     return this.catsService.getAll({ limit, page });
   }
 }

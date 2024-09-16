@@ -11,12 +11,13 @@ import {
   Param,
 } from '@nestjs/common';
 
-import { LikedCatsService } from './likedCats.service';
-import { AuthGuard } from '../auth/auth.guard';
-import { AddLikedCatDTO } from './dto/addLikedCat.dto';
+import { AuthGuard } from 'src/modules/auth/auth.guard';
+import { LikedCatsService } from '../services/likedCats.service';
+import { AddLikedCatDTO } from '../dto/addLikedCat.dto';
 
 import type { Request } from 'express';
-import type { UserEntity } from '../auth';
+import type { UserEntity } from 'src/modules/auth';
+import type { ILikedCat } from '../types';
 
 @UseGuards(AuthGuard)
 @Controller('likes')
@@ -24,7 +25,7 @@ export class LikedCatsController {
   public constructor(private readonly likedCatsService: LikedCatsService) {}
 
   @Get()
-  public async getAllLiked(@Req() request: Request): Promise<unknown[]> {
+  public async getAllLiked(@Req() request: Request): Promise<ILikedCat[]> {
     return this.likedCatsService.getAllByUser(this.getUser(request));
   }
 

@@ -1,7 +1,7 @@
 import { Column, Entity, Generated, Index, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { CONSTRAINTS } from '../constraints/auth.constraints';
-import { LikedCatEntity } from 'src/modules/likedCats';
+import { LikedCatEntity } from 'src/modules/cats';
 
 import type { Relation } from 'typeorm';
 

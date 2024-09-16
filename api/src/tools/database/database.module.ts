@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { Config } from '../config';
+import { Config } from 'src/tools/config';
 
 @Global()
 @Module({
