@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { AuthRepository } from './auth.repository';
 
 import type { NestMiddleware } from '@nestjs/common';
@@ -13,7 +14,11 @@ export class AuthMiddleware implements NestMiddleware {
   public async use(request: Request, _: Response, next: NextFunction): Promise<void> {
     const authToken = request.headers['x-auth-token'] as Optional<string>;
 
-    request.user = authToken ? await this.authRepository.getByAuthToken(authToken) : null;
+    try {
+      request.user = authToken ? await this.authRepository.getByAuthToken(authToken) : null;
+    } catch {
+      request.user = null;
+    }
 
     next();
   }

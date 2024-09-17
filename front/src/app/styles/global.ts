@@ -10,9 +10,17 @@ export const GlobalsStyles = styled.div`
       box-sizing: border-box;
     }
 
+    html {
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+    }
+
     body {
       color: ${mainTextColor};
       font-size: 150%;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      font-style: normal;
 
       background-color: ${mainBgColor};
 
@@ -34,6 +42,11 @@ export const GlobalsStyles = styled.div`
       &[disabled] {
         cursor: not-allowed;
       }
+    }
+
+    input {
+      font-family: inherit;
+      font-size: inherit;
     }
 
     label {

@@ -1,9 +1,8 @@
-import { redirect } from '@tanstack/react-router';
 import { StatusCodes } from 'http-status-codes';
 import ky from 'ky';
 
 import { SERVER_URL } from './constants';
-import { getAuthToken } from '@/shared/model/auth';
+import { getAuthToken, removeAuthToken } from '@/shared/model/auth';
 
 import type { HTTPError } from 'ky';
 
@@ -17,8 +16,11 @@ export const fetcher = ky.create({
     ],
     beforeError: [
       (error): HTTPError => {
-        if (error.response.status === StatusCodes.FORBIDDEN) {
-          redirect({ to: '/entry' });
+        if (error.response.status === StatusCodes.UNAUTHORIZED) {
+          removeAuthToken();
+
+          const entryPath = '/entry';
+          if (window.location.pathname !== entryPath) window.location.href = entryPath;
         }
 
         return error;

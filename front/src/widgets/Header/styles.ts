@@ -24,10 +24,15 @@ export const LinkContainer = styled.li`
 
 export const LinkText = styled.span`
   color: ${extraTextColor};
+
+  transition: opacity 200ms;
 `;
 
 export const Link = styled(TanstackLink)`
   text-decoration: none;
+  transition:
+    background-color 200ms,
+    opacity 200ms;
 
   padding: 23px 15px;
 
