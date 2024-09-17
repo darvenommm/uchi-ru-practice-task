@@ -3,14 +3,14 @@ import { useState } from 'react';
 
 import { deleteLike } from '../api/deleteLike';
 import { addLike } from '../api/addLike';
-import { LIKED_CATS_QUERY_KEY } from '@/entities/likedCats';
+import { LIKED_CATS_QUERY_KEY } from '@/entities/cats';
 
 interface IToggleCatLikeProps {
   catId: string;
-  hasLike: boolean;
+  hasLike?: boolean;
 }
 
-export const ToggleCatLike = ({ catId, hasLike }: IToggleCatLikeProps): JSX.Element => {
+export const ToggleCatLike = ({ catId, hasLike = true }: IToggleCatLikeProps): JSX.Element => {
   const [isLiked, setIsLiked] = useState<boolean>(hasLike);
 
   const addMutation = useMutation({

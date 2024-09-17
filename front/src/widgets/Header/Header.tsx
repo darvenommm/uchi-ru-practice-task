@@ -1,21 +1,43 @@
 import { Container } from '@/shared/ui/styles';
-import { Link } from '@tanstack/react-router';
+import { useLocation } from '@tanstack/react-router';
 
-import { HeaderContainer } from './styles';
+import { HeaderContainer, Links, LinkContainer, Link, ActiveLink, LinkText } from './styles';
 
-export const Header = (): JSX.Element => {
+interface IHeaderProps {
+  className?: string;
+}
+
+interface ILink {
+  text: string;
+}
+
+const links: Record<string, ILink> = {
+  '/': { text: 'Все котики' },
+  '/liked-cats': { text: 'Любимые котики' },
+} as const;
+
+export const Header = ({ className }: IHeaderProps): JSX.Element => {
+  const location = useLocation();
+
   return (
-    <HeaderContainer>
-      <Container>
-        <ul>
-          <li>
-            <Link to="/">Все котики</Link>
-          </li>
-          <li>
-            <Link to="/liked-cats">Любимые котики</Link>
-          </li>
-        </ul>
-      </Container>
-    </HeaderContainer>
+    <div className={className}>
+      <HeaderContainer>
+        <Container>
+          <Links>
+            {Object.entries(links).map(([path, { text }]): JSX.Element => {
+              const HeaderLink = location.pathname === path ? ActiveLink : Link;
+
+              return (
+                <LinkContainer key={path}>
+                  <HeaderLink to={path}>
+                    <LinkText>{text}</LinkText>
+                  </HeaderLink>
+                </LinkContainer>
+              );
+            })}
+          </Links>
+        </Container>
+      </HeaderContainer>
+    </div>
   );
 };

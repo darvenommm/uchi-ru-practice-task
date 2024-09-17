@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getLikedCats, LIKED_CATS_QUERY_KEY } from '@/entities/likedCats';
+import { CatCard, getLikedCats, LIKED_CATS_QUERY_KEY } from '@/entities/cats';
 import { ToggleCatLike } from '@/features/ToggleCatLike';
 
 export const LikedCats = (): JSX.Element => {
@@ -19,10 +19,7 @@ export const LikedCats = (): JSX.Element => {
       {likedCats.map(
         (likedCat): JSX.Element => (
           <li key={likedCat.id}>
-            {likedCat.url}{' '}
-            <p>
-              <ToggleCatLike catId={likedCat.id} hasLike={true} />
-            </p>
+            <CatCard imageUrl={likedCat.url} button={<ToggleCatLike catId={likedCat.id} />} />
           </li>
         ),
       )}

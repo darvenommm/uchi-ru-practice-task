@@ -1,7 +1,7 @@
 import { Fragment } from 'react/jsx-runtime';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { CATS_QUERY_KEY, getCats } from '@/entities/cats';
+import { CatCard, CATS_QUERY_KEY, getCats } from '@/entities/cats';
 import { useEffect, useRef } from 'react';
 import { ToggleCatLike } from '@/features/ToggleCatLike';
 
@@ -50,10 +50,10 @@ export const Cats = (): JSX.Element => {
 
               return (
                 <li key={cat.id} ref={isLast ? lastElementRef : undefined}>
-                  {cat.url}
-                  <p>
-                    <ToggleCatLike catId={cat.id} hasLike={cat.isLiked} />
-                  </p>
+                  <CatCard
+                    imageUrl={cat.url}
+                    button={<ToggleCatLike catId={cat.id} hasLike={cat.isLiked} />}
+                  />
                 </li>
               );
             })}

@@ -12,6 +12,7 @@ export const GlobalsStyles = styled.div`
 
     body {
       color: ${mainTextColor};
+      font-size: 150%;
 
       background-color: ${mainBgColor};
 
