@@ -1,1 +1,1 @@
-export { ToggleCatLike } from './ui/ToggleCatLike';
+export { ToggleCatLike } from './ToggleCatLike';

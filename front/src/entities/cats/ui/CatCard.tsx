@@ -1,3 +1,5 @@
+import { ImageContainer, ButtonContainer, Image } from './styles';
+
 import type { ReactNode } from 'react';
 
 interface ICatCardProps {
@@ -8,9 +10,9 @@ interface ICatCardProps {
 
 export const CatCard = ({ imageUrl, alt, button }: ICatCardProps): JSX.Element => {
   return (
-    <div>
-      <img src={imageUrl} alt={alt ?? 'Котик.'} />
-      <span>{button}</span>
-    </div>
+    <ImageContainer>
+      <Image src={imageUrl} alt={alt ?? 'Котик.'} />
+      <ButtonContainer>{button}</ButtonContainer>
+    </ImageContainer>
   );
 };

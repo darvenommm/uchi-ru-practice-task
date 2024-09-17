@@ -5,6 +5,8 @@ import { CatCard, CATS_QUERY_KEY, getCats } from '@/entities/cats';
 import { useEffect, useRef } from 'react';
 import { ToggleCatLike } from '@/features/ToggleCatLike';
 
+import { CatsList, CatItem } from './styles';
+
 export const Cats = (): JSX.Element => {
   const { data, error, fetchNextPage, status, isFetching } = useInfiniteQuery({
     queryKey: [CATS_QUERY_KEY],
@@ -41,7 +43,7 @@ export const Cats = (): JSX.Element => {
   if (status === 'error') return <p>Ошибка: {error.message}</p>;
 
   return (
-    <ul>
+    <CatsList>
       {data.pages.map(
         (cats, catsIndex): JSX.Element => (
           <Fragment key={catsIndex}>
@@ -49,17 +51,17 @@ export const Cats = (): JSX.Element => {
               const isLast = catIndex + 1 === cats.length;
 
               return (
-                <li key={cat.id} ref={isLast ? lastElementRef : undefined}>
+                <CatItem key={cat.id} ref={isLast ? lastElementRef : undefined}>
                   <CatCard
                     imageUrl={cat.url}
                     button={<ToggleCatLike catId={cat.id} hasLike={cat.isLiked} />}
                   />
-                </li>
+                </CatItem>
               );
             })}
           </Fragment>
         ),
       )}
-    </ul>
+    </CatsList>
   );
 };

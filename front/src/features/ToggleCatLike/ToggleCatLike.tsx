@@ -1,9 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { deleteLike } from '../api/deleteLike';
-import { addLike } from '../api/addLike';
+import { deleteLike } from './api/deleteLike';
+import { addLike } from './api/addLike';
 import { LIKED_CATS_QUERY_KEY } from '@/entities/cats';
+
+import { Button } from './styles';
+import FullHeart from 'public/full-heart.svg?react';
+import EmptyHeart from 'public/empty-heart.svg?react';
 
 interface IToggleCatLikeProps {
   catId: string;
@@ -34,8 +38,10 @@ export const ToggleCatLike = ({ catId, hasLike = true }: IToggleCatLikeProps): J
   };
 
   return (
-    <button onClick={clickButtonHandler} type="button">
-      {isLiked ? 'Remove like' : 'Add like'}
-    </button>
+    <Button onClick={clickButtonHandler} type="button">
+      {isLiked ?
+        <FullHeart />
+      : <EmptyHeart />}
+    </Button>
   );
 };
