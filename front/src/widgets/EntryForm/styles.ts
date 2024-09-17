@@ -16,10 +16,12 @@ export const Form = styled.form`
   border: 1px solid #000000;
   padding: 20px;
   max-width: 600px;
+  margin: 0 20px;
 `;
 
 export const Field = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 20px;
 `;
@@ -48,10 +50,13 @@ export const Button = styled.button`
 `;
 
 export const Input = styled.input`
+  display: block;
   padding: 5px 10px;
 
-  border: 1px solid #000000;
   border-radius: 5px;
+
+  border: 1px solid #000000;
+  width: 100%;
 `;
 
 export const ErrorMessageForAll = styled(Center)`

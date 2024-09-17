@@ -14,6 +14,7 @@ export const Cats = (): JSX.Element => {
     queryFn: ({ pageParam: page }: { pageParam: number }) => getCats({ page }),
     initialPageParam: 0,
     getNextPageParam: (_, allPages): number => allPages.length,
+    staleTime: Infinity,
   });
 
   const observer = useRef<null | IntersectionObserver>(null);

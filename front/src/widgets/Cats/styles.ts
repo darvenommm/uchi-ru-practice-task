@@ -2,7 +2,7 @@ import { styled } from '@linaria/react';
 
 export const CatsList = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 225px));
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
   gap: 46px;
 
   margin: 0;

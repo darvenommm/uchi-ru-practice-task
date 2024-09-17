@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 
 import { deleteLike } from './api/deleteLike';
 import { addLike } from './api/addLike';
-import { CATS_QUERY_KEY, ILikedCat, LIKED_CATS_QUERY_KEY } from '@/entities/cats';
+import { ILikedCat, LIKED_CATS_QUERY_KEY } from '@/entities/cats';
 
 import { Button } from './styles';
 import FullHeart from 'public/full-heart.svg?react';
@@ -41,7 +41,6 @@ export const ToggleCatLike = ({ catId, hasLike = true }: IToggleCatLikeProps): J
       return await addLike(catId);
     },
     onSuccess: (likedCat): void => {
-      queryClient.removeQueries({ queryKey: [CATS_QUERY_KEY] });
       queryClient.setQueryData([LIKED_CATS_QUERY_KEY], (old: ILikedCat[]): ILikedCat[] => [
         ...old,
         likedCat,
@@ -55,7 +54,6 @@ export const ToggleCatLike = ({ catId, hasLike = true }: IToggleCatLikeProps): J
       await deleteLike(catId);
     },
     onSuccess: (): void => {
-      queryClient.removeQueries({ queryKey: [CATS_QUERY_KEY] });
       queryClient.setQueryData([LIKED_CATS_QUERY_KEY], (old: ILikedCat[]): ILikedCat[] =>
         old.filter((cat): boolean => catId !== cat.id),
       );
@@ -63,12 +61,12 @@ export const ToggleCatLike = ({ catId, hasLike = true }: IToggleCatLikeProps): J
   });
 
   const clickButtonHandler = (): void => {
-    if (hasLike) deleteMutation.mutate(catId);
+    if (isLiked) deleteMutation.mutate(catId);
     else addMutation.mutate(catId);
   };
 
   return (
-    <Button ref={buttonRef} onClick={clickButtonHandler} type="button">
+    <Button onClick={clickButtonHandler} type="button">
       {isLiked || isHover ?
         <FullHeart />
       : <EmptyHeart />}
