@@ -3,9 +3,9 @@
 ## Инструкция по запуску
 
 1. Копируем данные из .env.default -> .env
-2. Вставить свой CATS_API_KEY (либо можно воспользоваться этим **live_XcjkVupugkXsKAJud19j4Jmdu2FI6Xh02M1lHB7PsMfqxO6Dxm4jlDmBF7E5dFWJ**)
+2. Вставить свой CATS_API_KEY (либо можно воспользоваться этим **live_XcjkVupugkXsKAJud19j4Jmdu2FI6Xh02M1lHB7PsMfqxO6Dxm4jlDmBF7E5dFWJ**) в .env
 3. Запустить docker compose up
-4. Перейти к [фронтенду](http://localhost:8080) (Убедись, что сервер запущен и FRONTEND_PORT равен 20000 <- его можно поменять в .env)
+4. Перейти к [фронтенду](http://localhost:8080) (Убедись, что сервер запущен и FRONTEND_PORT равен 8080 <- его можно поменять в .env)
 
 ## Нюансы
 
