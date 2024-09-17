@@ -11,7 +11,7 @@ services:
       cat-pinterest-api:
         condition: service_started
     ports:
-      - 8080:80
+      - $FRONTEND_PORT:80
     networks:
       - cat-pinterest-net
 
@@ -30,6 +30,7 @@ services:
       DB_PASSWORD: $DB_PASSWORD
       DB_DATABASE: $DB_DATABASE
       CATS_API_KEY: $CATS_API_KEY
+      FRONTEND_ORIGIN: $FRONTEND_ORIGIN
     depends_on:
       cat-pinterest-api-pg:
         condition: service_healthy
@@ -44,6 +45,7 @@ services:
       args:
         - SERVER_DOMAIN=$SERVER_DOMAIN
         - SERVER_PORT=$SERVER_PORT
+        - FRONTEND_PORT=$FRONTEND_PORT
     networks:
       - cat-pinterest-net
     environment:

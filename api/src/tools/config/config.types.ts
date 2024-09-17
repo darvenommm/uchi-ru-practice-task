@@ -5,6 +5,7 @@ export type IRawConfig = Readonly<{
   DB_PASSWORD: string;
   DB_DATABASE: string;
   CATS_API_KEY: string;
+  FRONTEND_ORIGIN: string;
 }>;
 
 export type IConfig = Readonly<{
@@ -14,4 +15,5 @@ export type IConfig = Readonly<{
   password: string;
   database: string;
   catsApiKey: string;
+  frontendOrigin: string;
 }>;

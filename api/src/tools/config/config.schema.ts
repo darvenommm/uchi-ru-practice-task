@@ -22,4 +22,7 @@ export class ConfigSchema implements IRawConfig {
 
   @IsNotEmpty()
   public CATS_API_KEY: string;
+
+  @IsNotEmpty()
+  public FRONTEND_ORIGIN: string;
 }

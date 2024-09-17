@@ -33,4 +33,8 @@ export class Config implements IConfig {
   public get catsApiKey(): string {
     return this.configService.get('CATS_API_KEY', { infer: true });
   }
+
+  public get frontendOrigin(): string {
+    return this.configService.get('FRONTEND_ORIGIN', { infer: true });
+  }
 }
