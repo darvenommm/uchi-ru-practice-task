@@ -1,4 +1,4 @@
-interface ICommonCat {
+export interface ICommonCat {
   id: string;
   url: string;
   width: number;
