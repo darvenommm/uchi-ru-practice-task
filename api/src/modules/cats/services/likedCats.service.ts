@@ -25,7 +25,7 @@ export class LikedCatsService {
     )) as ILikedCat[];
   }
 
-  public async addLikedCat(user: UserEntity, { apiId }: AddLikedCatDTO): Promise<void> {
+  public async addLikedCat(user: UserEntity, { apiId }: AddLikedCatDTO): Promise<ILikedCat> {
     let likedCat = await this.likedCatsRepository.getOneByApiId(apiId);
 
     if (!likedCat) {
@@ -34,6 +34,10 @@ export class LikedCatsService {
     }
 
     await this.likedCatsRepository.addLinkWithUser(likedCat, user);
+
+    const response = await fetch(`${this.CAT_API_URL}/${apiId}`);
+
+    return (await response.json()) as ILikedCat;
   }
 
   public async deleteLikedCat(apiId: string): Promise<void> {

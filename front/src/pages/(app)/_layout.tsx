@@ -2,7 +2,7 @@ import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { css } from '@linaria/core';
 
 import { Header } from '@/widgets/Header';
-import { Container } from '@/shared/ui/styles';
+import { Container } from '@/shared/ui/components/Container';
 
 const header = css`
   margin-bottom: 52px;

@@ -1,6 +1,6 @@
-import { css } from '@linaria/core';
+import { styled } from '@linaria/react';
 
-export const visuallyHidden = css`
+export const VisuallyHidden = styled.h1`
   position: absolute;
 
   width: 1px;

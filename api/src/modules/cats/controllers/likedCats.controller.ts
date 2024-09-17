@@ -33,8 +33,8 @@ export class LikedCatsController {
   public async addLikedCat(
     @Req() request: Request,
     @Body() addCatDTO: AddLikedCatDTO,
-  ): Promise<void> {
-    this.likedCatsService.addLikedCat(this.getUser(request), addCatDTO);
+  ): Promise<ILikedCat> {
+    return this.likedCatsService.addLikedCat(this.getUser(request), addCatDTO);
   }
 
   @Delete(':apiId')

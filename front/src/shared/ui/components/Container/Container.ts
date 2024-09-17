@@ -6,7 +6,7 @@ import {
   tabletBreakpoint,
   tabletPadding,
   mobilePadding,
-} from '../variables/width';
+} from '@/shared/ui/styles';
 
 export const Container = styled.div`
   max-width: ${desktopBreakpoint}px;

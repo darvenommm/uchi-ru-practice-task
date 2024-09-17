@@ -1,4 +1,4 @@
-import { Container } from '@/shared/ui/styles';
+import { Container } from '@/shared/ui/components/Container';
 import { useLocation } from '@tanstack/react-router';
 
 import { HeaderContainer, Links, LinkContainer, Link, ActiveLink, LinkText } from './styles';
